@@ -18,7 +18,6 @@ dToken = discordToken
 
 # load all the variables from the env file
 intents = discord.Intents.default()
-intents.typing = True
 intents.members = True
 intents.message_content = True
 bot = discord.Bot(intents=intents)
