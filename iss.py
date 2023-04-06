@@ -32,7 +32,7 @@ async def iss(ctx,key):
 
             except RuntimeError as APIFailure:
                 quit_counter = quit_counter+1
-                print(f"Failed for some reason. Trying {6-quit_counter} more times")
+                print(f"Failed because of {APIFailure}. Trying {6-quit_counter} more times")
 
         if quit_counter >= 6:
             break

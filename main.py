@@ -1,4 +1,5 @@
 import discord
+from discord import commands
 from iss import iss
 from people import people
 from flyover import flyover
@@ -66,5 +67,17 @@ async def lasers(ctx):
 async def launch(ctx):
     await nextFive(ctx)
 
+@bot.slash_command(name="author", description="For debugging")
+async def person(ctx):
+    print(f"Author Command From {ctx.author.name}")
+    await ctx.respond("Done")
+
+@bot.group(invoke_without_command=True)
+async def spacex(ctx):
+    await ctx.send("Group Not Fount")
+    
+@spacex.command()
+async def next_launch(ctx):
+    await ctx.send("Still being built")
 
 bot.run(discordToken)  # run the bot with the token

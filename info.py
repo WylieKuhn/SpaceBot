@@ -15,3 +15,4 @@ async def info(ctx):
     """
     
     await ctx.respond(info)
+    
