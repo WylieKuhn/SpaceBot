@@ -2,3 +2,7 @@
 keys.py
 nextL.json
 nextlaunch.json
+
+__pycache__/
+
+.vscode/
