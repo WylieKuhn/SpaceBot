@@ -3,9 +3,11 @@ from iss import iss
 from people import people
 from flyover import flyover
 from info import info
+from nearEarthObjects import near_earth_objects
 from overhead import overhead
 from launches import next_five
 from spacex import spacex_launches
+from neo_query import get_neo_data
 import logging
 from spacexjson import get_spacex_launch_data
 from keys import n2yoKey, positionKey, discordToken, nasa_key
@@ -17,7 +19,9 @@ logging.basicConfig(level=logging.INFO)
 n2Key = n2yoKey
 pKey = positionKey
 dToken = discordToken
+nasakey = nasa_key
 get_spacex_launch_data()
+get_neo_data(key=nasakey)
 
 
 # load all the variables from the env file
@@ -79,8 +83,16 @@ async def person(ctx):
 async def next_launch(ctx):
     await spacex_launches(ctx)
     
+@bot.slash_command(name="nearearthobjects", description="Show all objects coming close to earth between two dates")
+async def neo(ctx):
+    await near_earth_objects(ctx)
+    
 @tasks.loop(hours=2)
 async def get_spacex_launches():
     await get_spacex_launch_data()
+    
+@tasks.loop(hours=24)
+async def neo_display(ctx):
+    await get_neo_data(key=nasakey)
 
 bot.run(discordToken)  # run the bot with the token

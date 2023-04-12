@@ -1,6 +1,8 @@
 import json
 from datetime import datetime
 import requests
+from keys import nasa_key
+key=nasa_key
 
 def get_spacex_launch_data() -> None:
     """
@@ -17,3 +19,4 @@ def get_spacex_launch_data() -> None:
     json_to_file = json.dumps(json_to_write, indent=4)
     with open("nextlaunch.json", "w", encoding="utf-8") as out:
         out.write(json_to_file)
+        
