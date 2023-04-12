@@ -3,13 +3,17 @@ import json
 from dateutil import parser
 
 
-async def spaceXLaunches(ctx):
+async def spacex_launches(ctx):
+    """
+    Returns the next few upcoming SpaceX launches to the discord channel. 
+    It is ependent on the amount of information in the response fields
+    how many responses can be returned due to Discord's 2000 character message limit.
+    """
 
     file = open("nextlaunch.json", encoding="utf-8")
     json_file = json.load(file)
     launches = ""
 
-    # revamp from here down
     launch_string = "Upcoming SpaceX Launches:\n"
     for launch in json_file['results']:
         launch_string = launch_string + f"""

@@ -4,8 +4,8 @@ from people import people
 from flyover import flyover
 from info import info
 from overhead import overhead
-from launches import nextFive
-from spacex import spaceXLaunches
+from launches import next_five
+from spacex import spacex_launches
 import logging
 from spacexjson import get_spacex_launch_data
 from keys import n2yoKey, positionKey, discordToken
@@ -68,7 +68,7 @@ async def lasers(ctx):
 
 @bot.slash_command(name="launches", description="See upcoming spacecraft launches")
 async def launch(ctx):
-    await nextFive(ctx)
+    await next_five(ctx)
 
 @bot.slash_command(name="author", description="For debugging")
 async def person(ctx):
@@ -77,7 +77,7 @@ async def person(ctx):
     
 @bot.slash_command(name="spacexlaunches", description="Next SpaceX Launches")
 async def next_launch(ctx):
-    await spaceXLaunches(ctx)
+    await spacex_launches(ctx)
     
 @tasks.loop(hours=2)
 async def get_spacex_launches():

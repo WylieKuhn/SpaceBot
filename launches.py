@@ -1,16 +1,18 @@
 import requests
-import discord
 
-async def nextFive(ctx) -> str:
+async def next_five(ctx) -> str:
+    
     """
     Returns the next few spacecraft launches
     """
-    launches = requests.get("https://fdo.rocketlaunch.live/json/launches/next/5")
+    launches = requests.get(
+        "https://fdo.rocketlaunch.live/json/launches/next/5",
+        timeout=3
+        )
     launches_json = launches.json()
     print(launches_json)
 
     response_string = "Here is the data for the next upcoming spacecraft launches\n"
-
 
     for launch in launches_json['result']:
         next_launch_string = ""
@@ -23,10 +25,13 @@ async def nextFive(ctx) -> str:
         Suborbital: {launch['suborbital']}
         """
         if launch['missions'][0]['name'] is not None:
-            next_launch_string = next_launch_string + f"{launch['missions'][0]['name']}\n"
+            next_launch_string = next_launch_string + \
+                f"{launch['missions'][0]['name']}\n"
         if launch['missions'][0]['description'] is not None:
-            next_launch_string = next_launch_string + f"        {launch['missions'][0]['description']}"
-        next_launch_string = next_launch_string + f"        {launch['launch_description']}\n        ```"
+            next_launch_string = next_launch_string + \
+                f"        {launch['missions'][0]['description']}"
+        next_launch_string = next_launch_string + \
+            f"        {launch['launch_description']}\n        ```"
         if len(next_launch_string) + len(response_string) > 2000:
             break
         else:

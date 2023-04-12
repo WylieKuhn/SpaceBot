@@ -3,6 +3,9 @@ from datetime import datetime
 import requests
 
 def get_spacex_launch_data() -> None:
+    """
+    Queries the SpaceX launch schedule API and writes that data to a local JSON folder.
+    """
     now_ts = datetime.now().timestamp()
     response = requests.get(
         "https://lldev.thespacedevs.com/2.2.0/launch/upcoming/?search=SpaceX", 

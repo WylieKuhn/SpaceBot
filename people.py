@@ -2,7 +2,14 @@ import requests
 
 
 async def people(ctx):
-    space_get = requests.get('http://api.open-notify.org/astros.json')
+    """
+    Returns a message contaning the people in space and what 
+    spacecraft they are aboard.
+    """
+    space_get = requests.get('http://api.open-notify.org/astros.json',
+                             timeout=3
+                             )
+
     space_response = space_get.json()
     my_data = {}
 

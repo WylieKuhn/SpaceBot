@@ -15,12 +15,15 @@ async def overhead(ctx, message, key):
 
     # queries census api for gps coordinates of entered address
     census_code = requests.get(
-        f'https://geocoding.geo.census.gov/geocoder/locations/address?street={street}&city={city}&state={state}&zip={zip_code}&benchmark=Public_AR_Census2020&format=json')
+        f'https://geocoding.geo.census.gov/geocoder/locations/address?street={street}&city={city}&state={state}&zip={zip_code}&benchmark=Public_AR_Census2020&format=json',
+        timeout=3
+    )
     response = census_code.json()
 
     # Passes GPS coordinates to N2YO API to retrieve all overhead objects in a 2 degree radius
     visual = requests.get(
-        f"https://api.n2yo.com/rest/v1/satellite/above/{response['result']['addressMatches'][0]['coordinates']['y']}/{response['result']['addressMatches'][0]['coordinates']['x']}/0.0/2/0&apiKey={key}"
+        f"https://api.n2yo.com/rest/v1/satellite/above/{response['result']['addressMatches'][0]['coordinates']['y']}/{response['result']['addressMatches'][0]['coordinates']['x']}/0.0/2/0&apiKey={key}",
+        timeout=3
     )
     visual = visual.json()
 

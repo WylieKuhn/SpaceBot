@@ -1,5 +1,6 @@
-import requests
 import datetime
+import requests
+
 
 
 async def flyover(ctx, message, key):
@@ -15,10 +16,13 @@ async def flyover(ctx, message, key):
     zip_code = splitted[3][1:]
 
     census_code = requests.get(
-        f'https://geocoding.geo.census.gov/geocoder/locations/address?street={street}&city={city}&state={state}&zip={zip_code}&benchmark=Public_AR_Census2020&format=json')
+        f'https://geocoding.geo.census.gov/geocoder/locations/address?street={street}&city={city}&state={state}&zip={zip_code}&benchmark=Public_AR_Census2020&format=json',
+        timeout=3
+        )
     response = census_code.json()
     visual = requests.get(
-        f"https://api.n2yo.com/rest/v1/satellite/visualpasses/25544/{response['result']['addressMatches'][0]['coordinates']['y']}/{response['result']['addressMatches'][0]['coordinates']['x']}/0/2/300/&apiKey={key}")
+        f"https://api.n2yo.com/rest/v1/satellite/visualpasses/25544/{response['result']['addressMatches'][0]['coordinates']['y']}/{response['result']['addressMatches'][0]['coordinates']['x']}/0/2/300/&apiKey={key}",
+        timeout=3)
     visual = visual.json()
 
     information = f"""
