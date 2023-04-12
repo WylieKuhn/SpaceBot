@@ -8,7 +8,7 @@ from launches import next_five
 from spacex import spacex_launches
 import logging
 from spacexjson import get_spacex_launch_data
-from keys import n2yoKey, positionKey, discordToken
+from keys import n2yoKey, positionKey, discordToken, nasa_key
 from discord.ext import tasks
 
 logging.basicConfig(level=logging.INFO)
