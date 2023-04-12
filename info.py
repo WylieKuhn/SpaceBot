@@ -1,7 +1,8 @@
-import discord
-
 async def info(ctx):
-    info = """Welcome to SpaceBot! The following commands are availible: 
+    """
+    Returns information about the use of the bot to the user
+    """
+    information = """Welcome to SpaceBot! The following commands are availible: 
     ```
     /info: This command 
     /iss: See where the International Space Station currently is!
@@ -13,6 +14,5 @@ async def info(ctx):
     EXAMPLE: 123 Some Street, Some Town, NY, 12345
     ```
     """
-    
-    await ctx.respond(info)
+    await ctx.respond(information)
     

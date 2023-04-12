@@ -1,13 +1,15 @@
 import discord
-from discord import commands
 from iss import iss
 from people import people
 from flyover import flyover
 from info import info
 from overhead import overhead
 from launches import nextFive
+from spacex import spaceXLaunches
 import logging
+from spacexjson import get_spacex_launch_data
 from keys import n2yoKey, positionKey, discordToken
+from discord.ext import tasks
 
 logging.basicConfig(level=logging.INFO)
 
@@ -15,6 +17,7 @@ logging.basicConfig(level=logging.INFO)
 n2Key = n2yoKey
 pKey = positionKey
 dToken = discordToken
+get_spacex_launch_data()
 
 
 # load all the variables from the env file
@@ -71,13 +74,13 @@ async def launch(ctx):
 async def person(ctx):
     print(f"Author Command From {ctx.author.name}")
     await ctx.respond("Done")
-
-@bot.group(invoke_without_command=True)
-async def spacex(ctx):
-    await ctx.send("Group Not Fount")
     
-@spacex.command()
+@bot.slash_command(name="spacexlaunches", description="Next SpaceX Launches")
 async def next_launch(ctx):
-    await ctx.send("Still being built")
+    await spaceXLaunches(ctx)
+    
+@tasks.loop(hours=2)
+async def get_spacex_launches():
+    await get_spacex_launch_data()
 
 bot.run(discordToken)  # run the bot with the token
