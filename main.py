@@ -10,7 +10,8 @@ from spacex import spacex_launches
 from neo_query import get_neo_data
 import logging
 from spacexjson import get_spacex_launch_data
-from keys import n2yoKey, positionKey, discordToken, nasa_key
+from key_file import nasa_key, n2yoKey, positionKey, discordToken
+
 from discord.ext import tasks
 
 logging.basicConfig(level=logging.INFO)
@@ -20,8 +21,8 @@ n2Key = n2yoKey
 pKey = positionKey
 dToken = discordToken
 nasakey = nasa_key
-get_spacex_launch_data()
-get_neo_data(key=nasakey)
+#get_spacex_launch_data()
+#get_neo_data(key=nasakey)
 
 
 # load all the variables from the env file

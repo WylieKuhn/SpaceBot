@@ -6,3 +6,5 @@ nextlaunch.json
 __pycache__/
 
 .vscode/
+
+key_file.py

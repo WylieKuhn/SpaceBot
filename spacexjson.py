@@ -1,8 +1,6 @@
 import json
 from datetime import datetime
 import requests
-from keys import nasa_key
-key=nasa_key
 
 def get_spacex_launch_data() -> None:
     """
