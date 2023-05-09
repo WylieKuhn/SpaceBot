@@ -12,11 +12,11 @@ async def spacex_launches(ctx):
 
     file = open("nextlaunch.json", encoding="utf-8")
     json_file = json.load(file)
-    launches = ""
+    
 
-    launch_string = "Upcoming SpaceX Launches:\n"
+    await ctx.send(f"Upcoming SpaceX Launches As requested By {ctx.author.mention}")
     for launch in json_file['results']:
-        launch_string = launch_string + f"""
+        launch_string = f"""
 		```
 		Name: {launch['name']}
 		Description: {launch['status']['description']}
@@ -25,8 +25,4 @@ async def spacex_launches(ctx):
 		Launch Window (YYYY-MM-DD: 24 Hour Time Format): {parser.parse(launch['window_start'])} to {parser.parse(launch['window_end'])}
 		```
 		"""
-        if len(launches) + len(launch_string) < 2000:
-            launches = launch_string
-        if len(launches) + len(launch_string) > 2000:
-            break
-    await ctx.respond(launches)
+        await ctx.respond(launch_string)

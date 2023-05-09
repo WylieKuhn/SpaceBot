@@ -4,6 +4,7 @@ import json
 async def near_earth_objects(ctx):
     file = open("neo.json", encoding="utf-8")
     data = json.load(file)
+    await ctx.send(f"Upcoming Launches As Requested By {ctx.author.mention}")
 
     count = 0
     response_string = f"{len(data['near_earth_objects'])} Objects passing close to earth in the next 7 days, probably showing fewer due to discord message length restrictions. \n Refreshes every 24 hours.\n"
@@ -27,4 +28,5 @@ async def near_earth_objects(ctx):
             response_string = response_string + object_string
         elif len(object_string) + len(response_string) > 2000:
             break
-    await ctx.respond(response_string)
+        await ctx.send(response_string)
+    

@@ -11,8 +11,8 @@ async def next_five(ctx) -> str:
         )
     launches_json = launches.json()
     print(launches_json)
-
-    response_string = "Here is the data for the next upcoming spacecraft launches\n"
+    await ctx.send(f"Upcoming Launches As Requested By {ctx.author.mention}")
+    response_string = ""
 
     for launch in launches_json['result']:
         next_launch_string = ""
@@ -38,4 +38,4 @@ async def next_five(ctx) -> str:
             response_string = response_string + next_launch_string
         await ctx.send(response_string)
         
-    await ctx.respond("response_string")
+    
