@@ -36,4 +36,6 @@ async def next_five(ctx) -> str:
             break
         else:
             response_string = response_string + next_launch_string
-    await ctx.respond(response_string)
+        await ctx.send(response_string)
+        
+    await ctx.respond("response_string")
