@@ -20,6 +20,7 @@ async def flyover(ctx, message, key):
         timeout=3
         )
     response = census_code.json()
+    
     visual = requests.get(
         f"https://api.n2yo.com/rest/v1/satellite/visualpasses/25544/{response['result']['addressMatches'][0]['coordinates']['y']}/{response['result']['addressMatches'][0]['coordinates']['x']}/0/2/300/&apiKey={key}",
         timeout=3)
